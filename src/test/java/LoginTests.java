@@ -19,7 +19,7 @@ public class LoginTests extends BaseTest {
 
         // TODO: Fix the URL if the test fails
         // First Test
-        String url = "https://qa.koel.app/";
+        String url = "https://testpro.io/";
         driver.get(url);
         Assert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();
