@@ -118,4 +118,12 @@ public class BaseTest {
         WebElement notification = driver.findElement(By.cssSelector("div.success.show"));
         return notification.getText();
     }
+
+    //Click «Play next song» (media player controls), then the Play button, to play a song.
+    public void clickPlayNextSong () {
+        WebElement playNextSongBtn = driver.findElement(By.cssSelector("i[class='next fa fa-step-forward control']"));
+        playNextSongBtn.click();
+        WebElement playButton = driver.findElement(By.xpath("//footer//i[@class='fa fa-play']"));
+        playButton.click();
+    }
 }
