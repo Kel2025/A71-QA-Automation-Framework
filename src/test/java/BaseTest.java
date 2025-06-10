@@ -4,9 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 import java.util.UUID;
@@ -14,21 +12,26 @@ import java.util.UUID;
 
 public class BaseTest {
     public WebDriver driver = null;
-    public String url = "https://qa.koel.app/";
-
+    public String url = null;
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
 
     @BeforeMethod
-    public void InitiateBrowser() {
+    @Parameters ({"BaseURL"})
+
+    public void launchBrowser(String baseURL) {
+        // Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
+        url = baseURL;
+        navigateUrl();
+
     }
 
     @AfterMethod
@@ -126,4 +129,7 @@ public class BaseTest {
         WebElement playButton = driver.findElement(By.xpath("//footer//i[@class='fa fa-play']"));
         playButton.click();
     }
+
+
+
 }

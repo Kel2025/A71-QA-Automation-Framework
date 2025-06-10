@@ -15,8 +15,23 @@ dependencies {
     testImplementation 'io.github.bonigarcia:webdrivermanager:5.8.0'
 }
 
+
+task testSmoke(type: Test) {
+    useTestNG() {
+        suites "src/test/resources/Smoke.xml"
+    }
+}
+
 test {
     useTestNG() {
         suites "src/test/resources/TestNG.xml"
+     //   suites "src/test/resources/Smoke.xml"
+     //   suites "src/test/resources/Regression.xml"
     }
+
 }
+
+
+
+
+
