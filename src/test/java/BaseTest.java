@@ -131,5 +131,21 @@ public class BaseTest {
     }
 
 
+    // Select playlist from side menu
+    public void clickPlaylist () {
+        WebElement playlist = driver.findElement(By.xpath("//section[@id='playlists']//a[contains(text(), 'Delete This')]"));
+        playlist.click();
+    }
 
+    // Click the red delete playlist button
+    public void clickDeletePlaylistButton () {
+        WebElement deletePlaylistButton = driver.findElement(By.cssSelector("button[class=\"del btn-delete-playlist\"]"));
+        deletePlaylistButton.click();
+    }
+
+    // Get the notification for successful playlist delete
+    public String getDeletedPlaylistSuccessMsg() {
+        WebElement notification = driver.findElement(By.cssSelector("div.success.show"));
+        return notification.getText();
+    }
 }
