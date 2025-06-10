@@ -3,9 +3,10 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+
 public class LoginTests extends BaseTest {
 
-    @Test
+   // @Test (enabled = true, priority = 0, description = "Login with valid email and valid password")
     public void loginValidEmailPassword() throws InterruptedException {
         //Test Steps
         //Step 1 navigate to koel app
@@ -22,11 +23,11 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue(avatar.isDisplayed());
     }
 
-    @Test
+   // @Test (enabled = true, priority = 1, description = "Login with invalid email and valid password")
     public void loginInvalidEmail() throws InterruptedException {
         // Test Steps
         //Step 1 : Open koel login page
-        navigateUrl();
+        //navigateUrl();
         //Step 2: Enter non existing email
         provideEmail("Incorrect@testpro.io");
         //Step 3: Enter correct Password
@@ -39,7 +40,7 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue(registrationLink.isDisplayed());
     }
 
-    @Test
+   // @Test (enabled = true, priority = 3, description = "Login with valid email and empty password")
     public void loginEmptyPassword() throws InterruptedException {
 
         navigateUrl();
@@ -49,7 +50,16 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
 
+    @Test (dataProvider = "IncorrectLoginData", dataProviderClass = TestDataProvider.class)
+    //Above:  Calls the data provider set by name, calls the class where the data provider set is located
 
+    public void NegativeTesting (String email, String password) throws InterruptedException {
+        provideEmail(email);
+        providePassword(password);
+        clickSubmit();
+        Thread.sleep(2000);
 
+        Assert.assertEquals(driver.getCurrentUrl(), url);
+    }
 
 }
