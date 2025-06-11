@@ -12,4 +12,11 @@ public class TestDataProvider extends BaseTest {
                 {"",""}
         };
     }
+
+    @DataProvider (name = "ValidLoginData")
+    public static Object [][] positiveTestData () {
+        return new Object[][] {
+                {"kelly.wade@testpro.io", "P!990109189300ok"}
+        };
+    }
 }
