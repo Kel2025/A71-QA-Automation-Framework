@@ -20,7 +20,7 @@ public class ProfileTests extends BaseTest {
         providePassword("P!990109189300ok");
         //click submit
         clickLoginBtn();
-        String randomName = randomName();
+        String randomName = generateRandomName();
         //pause for 2 seconds for page to load
         //Thread.sleep(2000);
         //click avatar icon to go to profile setting page
@@ -34,11 +34,14 @@ public class ProfileTests extends BaseTest {
         //wait 2 seconds
         //Thread.sleep(2000);
         //verify profile name change
-        WebElement actualProfileName = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span[class='name']")));
+
+        //explicit wait for name change to appear
+        wait.until(ExpectedConditions.textToBe(By.cssSelector("a.view-profile>span"), randomName));
+        WebElement actualProfileName = driver.findElement(By.cssSelector("a.view-profile>span"));
         Assert.assertEquals(actualProfileName.getText(),randomName);
     }
 
-    public String randomName() {
+    public String generateRandomName() {
         return UUID.randomUUID().toString().replace("-","");
     }
 

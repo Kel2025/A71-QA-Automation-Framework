@@ -80,4 +80,10 @@ public class BaseTest {
         loginBtn.click();
     }
 
+    public void login () {
+        provideEmail("kelly.wade@testpro.io");
+        providePassword("P!990109189300ok");
+        clickLoginBtn();
+    }
+
 }
