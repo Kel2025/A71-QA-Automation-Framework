@@ -38,30 +38,22 @@ public class BaseTest {
 
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
         // maximize window so all elements are visible
         driver.manage().window().maximize();
-        actions = new Actions(driver);
+
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        actions = new Actions(driver);
+
         url = baseURL;
-
         navigateUrl();
-
     }
 
     @AfterMethod
-    public void closeBrowser() {
-        driver.quit();
-    }
+    public void closeBrowser() {driver.quit(); }
 
-
-    public void navigateUrl() {
-        driver.get(url);
-    }
+    public void navigateUrl() {driver.get(url); }
 
     public void provideEmail(String email) {
-        //WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
-        //switching to explicit wait
         WebElement emailField = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
         emailField.clear();
@@ -69,8 +61,6 @@ public class BaseTest {
     }
 
     public void providePassword(String password) {
-        //WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
-        //switching to explicit wait
         WebElement passwordField = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']")));
         passwordField.clear();
@@ -78,8 +68,6 @@ public class BaseTest {
     }
 
     public void clickLoginBtn() {
-        //WebElement loginBtn = driver.findElement(By.cssSelector("button[type='submit']"));
-        //switching to explicit wait
         WebElement loginBtn = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']")));
         loginBtn.click();

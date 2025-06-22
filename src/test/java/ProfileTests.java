@@ -1,3 +1,6 @@
+import POM.HomePage;
+import POM.LoginPage;
+import POM.ProfilePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,63 +14,30 @@ public class ProfileTests extends BaseTest {
 
     @Test
     public void changeProfileName() throws InterruptedException {
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        ProfilePage profilePage = new ProfilePage(driver);
 
-        //Navigate to Koel app
-        navigateUrl();
-        //provide email
-        provideEmail("kelly.Wade@testpro.io");
-        //provide password
-        providePassword("P!990109189300ok");
-        //click submit
-        clickLoginBtn();
         String randomName = generateRandomName();
-        //pause for 2 seconds for page to load
-        //Thread.sleep(2000);
-        //click avatar icon to go to profile setting page
-        clickAvatarIcon();
-        //provide current Password
-        provideCurrentPassword("P!990109189300ok");
-        //provide profile name
-        provideProfileName(randomName);
-        //click save button
-        clickSaveButton();
-        //wait 2 seconds
-        //Thread.sleep(2000);
-        //verify profile name change
 
-        //explicit wait for name change to appear
-        wait.until(ExpectedConditions.textToBe(By.cssSelector("a.view-profile>span"), randomName));
-        WebElement actualProfileName = driver.findElement(By.cssSelector("a.view-profile>span"));
-        Assert.assertEquals(actualProfileName.getText(),randomName);
+        loginPage.login();
+       // Thread.sleep(2000);
+        // The test fails without using Thread.sleep(2000)
+        // It gives the "element click intercepted error for the line below: homePage.clickUserAvatarIcon();
+        homePage.clickUserAvatarIcon();
+        profilePage.provideCurrentPassword("P!990109189300ok");
+        //provide new profile name
+        profilePage.provideNewProfileName(randomName);
+        // Click save button to save changes
+        profilePage.clickSaveBtn();
+        //assert profile name changed
+        wait.until(ExpectedConditions.textToBe(profilePage.actualProfileName, randomName));
+        Assert.assertEquals(profilePage.getProfileNameText(), randomName);
+
     }
-
     public String generateRandomName() {
         return UUID.randomUUID().toString().replace("-","");
     }
-
-    public void clickAvatarIcon(){
-        //WebElement avatarIcon = driver.findElement(By.cssSelector("img.avatar"));
-        WebElement avatarIcon = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img.avatar")));
-        avatarIcon.click();
-    }
-
-    public void provideCurrentPassword(String Password) {
-        WebElement currentPassword = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[name='current_password']")));
-        currentPassword.sendKeys(Password);
-    }
-
-    public void provideProfileName(String randomName) {
-        WebElement profileNameField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
-        profileNameField.clear();
-        profileNameField.sendKeys(randomName);
-    }
-
-    public void clickSaveButton() {
-        WebElement saveButton = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.btn-submit")));
-        saveButton.click();
-    }
-
 }
 
 
