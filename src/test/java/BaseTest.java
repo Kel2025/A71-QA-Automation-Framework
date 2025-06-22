@@ -11,15 +11,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 import java.time.Duration;
-import java.util.Locale;
-import java.util.UUID;
+
 
 
 public class BaseTest {
 
     public WebDriver driver = null;
     public String url = null;
-
+    public Actions actions = null;
     WebDriverWait wait;
 
 
@@ -29,7 +28,8 @@ public class BaseTest {
     }
 
     @BeforeMethod
-    @Parameters ({"BaseURL"})
+    @Parameters({"BaseURL"})
+
 
     public void launchBrowser(String baseURL) {
         // Added ChromeOptions argument below to fix websocket error
@@ -41,6 +41,7 @@ public class BaseTest {
 
         // maximize window so all elements are visible
         driver.manage().window().maximize();
+        actions = new Actions(driver);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         url = baseURL;
 
@@ -84,9 +85,15 @@ public class BaseTest {
         loginBtn.click();
     }
 
-    public void login () {
+    public void login() {
         provideEmail("kelly.wade@testpro.io");
         providePassword("P!990109189300ok");
         clickLoginBtn();
+    }
+
+    public String generateRandomPlaylistName() {
+        Faker faker = new Faker();
+        String newName = faker.buffy().characters();
+        return newName;
     }
 }
