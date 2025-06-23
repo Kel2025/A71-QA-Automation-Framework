@@ -12,7 +12,7 @@ public class LoginTests extends BaseTest {
         LoginPage loginpage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         //call methods from POM pages
-        loginpage.provideEmail("kelly.wade@testpro.io").providePassword("P!990909189300ok");
+        loginpage.provideEmail("kelly.wade@testpro.io").providePassword("P!990109189300ok");
         Assert.assertTrue(homePage.getUserAvatarIcon().isDisplayed());
     }
 
