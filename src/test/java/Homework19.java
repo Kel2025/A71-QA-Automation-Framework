@@ -1,3 +1,4 @@
+import POM.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -9,11 +10,13 @@ public class Homework19 extends BaseTest{
     public void deletePlaylist(String email, String password) throws InterruptedException {
         String expectedPlaylistDeletedMsg = "Deleted playlist \"Delete This.\"";
 
+        LoginPage loginPage = new LoginPage(driver);
+
         navigateUrl();
         // Log in to Koel app
-        provideEmail(email);
-        providePassword(password);
-        clickLoginBtn();
+        loginPage.provideEmail(email);
+        loginPage.providePassword(password);
+        loginPage.clickSubmit();
         // Select playlist to be deleted
         clickPlaylist();
         // Click on the delete playlist button

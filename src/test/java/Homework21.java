@@ -1,3 +1,5 @@
+import POM.HomePage;
+import POM.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -11,47 +13,34 @@ public class Homework21 extends BaseTest {
     @Test
     public void renamePlaylist ()  {
         String newPlaylistName = generateRandomPlaylistName();
+        String updatedPlaylistMsg = "Updated playlist \"" + newPlaylistName  + ".\"";
+
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
 
         //Log in to koel app
-        login();
+        loginPage.login();
         // double click playlist from side menu
-        doubleClickPlaylist();
+        homePage.doubleClickPlaylist();
         //clear field, enter new playlist name
-        enterNewPlaylistName(newPlaylistName);
-        //verify success message and playlist name is changed
-        // first assert that success message is displayed
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
-        //locator for playlist element
-        WebElement playlist = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        By.cssSelector(".playlist:nth-child(3)")));
-        //  then assert that the actual playlist name matches the randomly generated name
-        Assert.assertEquals(playlist.getText(), newPlaylistName);
+        homePage.enterNewPlaylistName(newPlaylistName);
+        // Assert that the actual playlist name matches the new randomly generated name
+        Assert.assertEquals(homePage.getRenamePlaylistSuccessMsg(), updatedPlaylistMsg);
     }
 
-    //methods
+    @Test
+    public void createNewPlaylist() {
+        String playlistName = randomPlaylistName();
+        String createdPlaylistMsg = "Created playlist \"" + playlistName  + ".\"";
 
-    // double click playlist from side menu
-    public void doubleClickPlaylist () {
-        // explicit wait for playlist locater
-        WebElement playlist = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        By.cssSelector(".playlist:nth-child(3)")));
-        // double click action
-        actions.doubleClick(playlist).perform();
-    }
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
 
-    // clear input field and enter new name for playlist
-    public void enterNewPlaylistName(String newPlaylistName)  {
-        // wait for web element to be located
-        WebElement playlistNameField = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        By.cssSelector(".playlist:nth-child(3) input")));
-        //clear the input field
-        playlistNameField.sendKeys(Keys.chord(Keys.CONTROL,"A", Keys.DELETE));
-        //enter new playlist name
-        playlistNameField.sendKeys(newPlaylistName);
-        playlistNameField.sendKeys(Keys.ENTER);
+        loginPage.login();
+        homePage.clickCreatePlaylistBtn();
+        homePage.clickNewPlaylist();
+        homePage.enterPlaylistName(playlistName);
+        Assert.assertEquals(homePage.getCreatedPlaylistSuccessMsg(), createdPlaylistMsg);
     }
 }
 
