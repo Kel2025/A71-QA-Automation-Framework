@@ -1,3 +1,4 @@
+import POM.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -8,13 +9,14 @@ public class Homework18 extends BaseTest {
 
     @Test
     public void playSong() {
+        LoginPage loginPage = new LoginPage(driver);
 
         // Navigate to koel app
         //navigateUrl();
         // Login with valid credentials
-        provideEmail("kelly.wade@testpro.io");
-        providePassword("P!990109189300ok");
-        clickLoginBtn();
+        loginPage.provideEmail("kelly.wade@testpro.io");
+        loginPage.providePassword("P!990109189300ok");
+        loginPage.clickSubmit();
         //Click «Play next song» (media player controls), then the Play button, to play a song.
         clickPlayNextSong();
         // Validate that a song is playing by verifying if the sound bar, or the pause button is displayed.

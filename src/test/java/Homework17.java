@@ -1,3 +1,4 @@
+import POM.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,13 +13,15 @@ public class Homework17 extends BaseTest {
     public void addSongToPlaylist() {
         String expectedSongAddedMsg = "Added 1 song into \"Second User Playlist.\"";
 
+        LoginPage loginPage = new LoginPage(driver);
+
         // Navigate to koel app
         navigateUrl();
 
         // Log in with valid credentials
-        provideEmail("kelly.wade@testpro.io");
-        providePassword("P!990109189300ok");
-        clickLoginBtn();
+        loginPage.provideEmail("kelly.wade@testpro.io");
+        loginPage.providePassword("P!990109189300ok");
+        loginPage.clickSubmit();
         // Search for a song
         searchSong("Lament");
         // Click 'View All' button to display search results

@@ -12,7 +12,7 @@ public class LoginTests extends BaseTest {
         LoginPage loginpage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         //call methods from POM pages
-        loginpage.login();
+        loginpage.provideEmail("kelly.wade@testpro.io").providePassword("P!990909189300ok");
         Assert.assertTrue(homePage.getUserAvatarIcon().isDisplayed());
     }
 
@@ -21,9 +21,7 @@ public class LoginTests extends BaseTest {
         // Implement pages from POM, create new objects for each page
         LoginPage loginPage = new LoginPage(driver);
         //Call methods from POM pages
-        loginPage.provideEmail("Incorrect@testpro.io");
-        loginPage.providePassword("P!990109189300ok");
-        loginPage.clickSubmit();
+        loginPage.provideEmail("Incorrect@testpro.io").providePassword("P!990109189300ok").clickSubmit();
         Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
     }
 
@@ -32,9 +30,9 @@ public class LoginTests extends BaseTest {
         // Implement pages from POM, create new objects for each page
         LoginPage loginPage = new LoginPage(driver);
         //Call methods from POM pages
-        loginPage.provideEmail("kelly.wade@testpro.io");
-        loginPage.providePassword("");
-        loginPage.clickSubmit();
+        loginPage.provideEmail("kelly.wade@testpro.io")
+                 .providePassword("")
+                 .clickSubmit();
         Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
     }
 
@@ -45,9 +43,9 @@ public class LoginTests extends BaseTest {
         // Implement pages from POM, create new objects for each page
         LoginPage loginPage = new LoginPage(driver);
         //Call methods from POM pages
-        loginPage.provideEmail(email);
-        loginPage.providePassword(password);
-        loginPage.clickSubmit();
+        loginPage.provideEmail(email)
+                 .providePassword(password);
+                 .clickSubmit();
         Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
     }
 }
