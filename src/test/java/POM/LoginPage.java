@@ -29,9 +29,4 @@ public class LoginPage extends BasePage{
         providePassword("P!990109189300ok");
         clickSubmit();
     }
-    // Return registrationLink element
-    public WebElement getRegistrationLink() {
-        return findElement(registrationLink);
-    }
-
 }
