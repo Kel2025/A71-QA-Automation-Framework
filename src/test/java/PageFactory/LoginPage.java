@@ -1,12 +1,10 @@
 package PageFactory;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 
 public class LoginPage extends BasePage {
-    public LoginPage (WebDriver givenDriver) {super(givenDriver);}
 
     // locators
     @FindBy (css = "input[type='email']")
@@ -15,8 +13,10 @@ public class LoginPage extends BasePage {
     WebElement passwordField;
     @FindBy (css = "button[type='submit']")
     WebElement submitBtnLocator;
+    @FindBy (css = "a[href='registration']")
+    WebElement registrationLink;
 
-
+    public LoginPage (WebDriver givenDriver) {super(givenDriver);}
 
     // Fluent interface
     public LoginPage provideEmail (String email) {
@@ -30,6 +30,9 @@ public class LoginPage extends BasePage {
     public LoginPage clickSubmit () {
       click(submitBtnLocator);
       return this;
-
+    }
+    public boolean getRegistrationLink () {
+        findElement(registrationLink).isDisplayed();
+       return  true;
     }
 }
