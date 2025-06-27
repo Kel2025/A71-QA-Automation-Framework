@@ -15,7 +15,10 @@ import java.util.List;
         @Test
         public void playSongTest() throws InterruptedException {
             Actions actions = new Actions(driver);
-            login();
+            LoginPage loginPage = new LoginPage(driver);
+
+            loginPage.login();
+
             driver.findElement(By.cssSelector(".music .songs")).click();
             // hover over in clickPlayBtn
 
@@ -39,10 +42,11 @@ import java.util.List;
 
         @Test
         public void renamePlaylist() throws InterruptedException {
+            LoginPage loginPage = new LoginPage(driver);
             // double click to choose playlist
             String playlistName = generateRandomPlaylistName();
 
-            login();
+            loginPage.login();
             // check first custom playlist
             WebElement playlist = driver.findElement(By.cssSelector(".playlist:nth-child(3)"));
             new Actions(driver)
@@ -65,7 +69,8 @@ import java.util.List;
         public void playSongFromListTest() {
             // right click on first song
             Actions actions = new Actions(driver);
-            login();
+            LoginPage loginPage = new LoginPage(driver);
+            loginPage.login();
             driver.findElement(By.cssSelector(".music .songs")).click();
             // right click
             WebElement song = driver.findElement(By.cssSelector(".song-list-wrap .scroller .items .title"));

@@ -14,7 +14,7 @@ public class LoginPage extends BasePage {
     @FindBy (css = "input[type='password']")
     WebElement passwordField;
     @FindBy (css = "button[type='submit']")
-    By submitBtnLocator;
+    WebElement submitBtnLocator;
 
 
 
@@ -27,10 +27,9 @@ public class LoginPage extends BasePage {
         passwordField.sendKeys(password);
         return this;
     }
-    public LoginPage clickSubmitBtn () {
+    public LoginPage clickSubmit () {
       click(submitBtnLocator);
       return this;
 
     }
-
 }

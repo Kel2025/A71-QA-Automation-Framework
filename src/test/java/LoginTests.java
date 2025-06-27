@@ -10,10 +10,11 @@ public class LoginTests extends BaseTest {
     @Test (enabled = true, priority = 0, description = "Login with valid email and valid password")
     public void loginValidEmailPassword()  {
        // Implement pages from POM, create new objects for each page
-        LoginPage loginpage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+
         HomePage homePage = new HomePage(driver);
         //call methods from POM pages
-        loginpage.provideEmail("kelly.wade@testpro.io").providePassword("P!990109189300ok").clickSubmit();
+        loginPage.provideEmail("kelly.wade@testpro.io").providePassword("P!990109189300ok").clickSubmit();
         Assert.assertTrue(homePage.getUserAvatarIcon().isDisplayed());
     }
 
@@ -32,8 +33,8 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         //Call methods from POM pages
         loginPage.provideEmail("kelly.wade@testpro.io")
-                 .providePassword("")
-                 .clickSubmit();
+                .providePassword("")
+                .clickSubmit();
         Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
     }
 
@@ -44,7 +45,9 @@ public class LoginTests extends BaseTest {
         // Implement pages from POM, create new objects for each page
         LoginPage loginPage = new LoginPage(driver);
         //Call methods from POM pages
-        loginPage.provideEmail(email).providePassword(password).clickSubmit();
+        loginPage.provideEmail(email)
+                .providePassword(password)
+                .clickSubmit();
         Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
     }
 }
