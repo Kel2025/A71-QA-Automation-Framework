@@ -54,33 +54,7 @@ public class BaseTest {
 
 
 
-    //refactor the commented out code to LoginPage POM and PageFactory and all other related code
-//    public void provideEmail(String email) {
-//        WebElement emailField = wait.until(
-//                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
-//        emailField.clear();
-//        emailField.sendKeys(email);
-//    }
-//
-//    public void providePassword(String password) {
-//        WebElement passwordField = wait.until(
-//                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']")));
-//        passwordField.clear();
-//        passwordField.sendKeys(password);
-//    }
-//
-//    public void clickLoginBtn() {
-//        WebElement loginBtn = wait.until(
-//                ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']")));
-//        loginBtn.click();
-//    }
-//
-//    public void login() {
-//        provideEmail("kelly.wade@testpro.io");
-//        providePassword("P!990109189300ok");
-//        clickLoginBtn();
-//    }
-//
+
     public String generateRandomPlaylistName() {
         Faker faker = new Faker();
         String newName = faker.buffy().characters();

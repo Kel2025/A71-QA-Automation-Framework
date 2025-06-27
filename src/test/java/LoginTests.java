@@ -1,3 +1,4 @@
+import POM.BasePage;
 import POM.HomePage;
 import POM.LoginPage;
 import org.testng.Assert;
@@ -12,7 +13,7 @@ public class LoginTests extends BaseTest {
         LoginPage loginpage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         //call methods from POM pages
-        loginpage.provideEmail("kelly.wade@testpro.io").providePassword("P!990109189300ok");
+        loginpage.provideEmail("kelly.wade@testpro.io").providePassword("P!990109189300ok").clickSubmit();
         Assert.assertTrue(homePage.getUserAvatarIcon().isDisplayed());
     }
 
@@ -43,9 +44,7 @@ public class LoginTests extends BaseTest {
         // Implement pages from POM, create new objects for each page
         LoginPage loginPage = new LoginPage(driver);
         //Call methods from POM pages
-        loginPage.provideEmail(email)
-                 .providePassword(password);
-                 .clickSubmit();
+        loginPage.provideEmail(email).providePassword(password).clickSubmit();
         Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
     }
 }
