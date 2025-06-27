@@ -32,6 +32,7 @@ public class BasePage {
     public WebElement findElement(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
     public void click (By locator) {wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).click();}
     public void doubleClick (By locator) {actions.doubleClick(findElement(locator)).perform(); }
     public void chooseAllSongsList() {click(allSongsList);}
