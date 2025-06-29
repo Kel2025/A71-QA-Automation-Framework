@@ -1,3 +1,7 @@
+import PageFactory.BasePage;
+import PageFactory.HomePage;
+import PageFactory.LoginPage;
+import PageFactory.ProfilePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -5,8 +9,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import POM.LoginPage;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +45,9 @@ import java.util.List;
         @Test
         public void renamePlaylist() throws InterruptedException {
             LoginPage loginPage = new LoginPage(driver);
+            BasePage basePage = new BasePage(driver);
             // double click to choose playlist
-            String playlistName = generateRandomPlaylistName();
+            String playlistName = basePage.generateRandomPlaylistName();
 
             loginPage.login();
             // check first custom playlist
@@ -70,6 +73,7 @@ import java.util.List;
             // right click on first song
             Actions actions = new Actions(driver);
             LoginPage loginPage = new LoginPage(driver);
+
             loginPage.login();
             driver.findElement(By.cssSelector(".music .songs")).click();
             // right click
@@ -80,8 +84,5 @@ import java.util.List;
             driver.findElement(By.cssSelector("li.playback")).click();
             Assert.assertTrue(wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid='toggle-visualizer-btn']"))).isDisplayed());
         }
-
-
-
     }
 

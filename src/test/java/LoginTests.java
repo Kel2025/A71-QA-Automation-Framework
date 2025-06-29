@@ -1,6 +1,4 @@
-import PageFactory.BasePage;
-import PageFactory.LoginPage;
-import POM.HomePage;
+import PageFactory.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -11,11 +9,11 @@ public class LoginTests extends BaseTest {
     public void loginValidEmailPassword()  {
        // Implement pages from PageFactory, create new objects for each page
         LoginPage loginPage = new LoginPage(driver);
-
         HomePage homePage = new HomePage(driver);
+
         //call methods from PageFactory pages
         loginPage.provideEmail("kelly.wade@testpro.io").providePassword("P!990109189300ok").clickSubmit();
-        Assert.assertTrue(homePage.getUserAvatarIcon().isDisplayed());
+        Assert.assertTrue(homePage.getUserAvatarIcon());
     }
 
     @Test (enabled = true, priority = 1, description = "Login with invalid email and valid password")
@@ -24,7 +22,7 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         //Call methods from PageFactory pages
         loginPage.provideEmail("Incorrect@testpro.io").providePassword("P!990109189300ok").clickSubmit();
-        Assert.assertTrue(loginPage.getRegistrationLink());
+        Assert.assertTrue(loginPage.registrationLinkIsDisplayed());
     }
 
     @Test (enabled = true, priority = 3, description = "Login with valid email and empty password")
@@ -35,7 +33,7 @@ public class LoginTests extends BaseTest {
         loginPage.provideEmail("kelly.wade@testpro.io")
                 .providePassword("")
                 .clickSubmit();
-        Assert.assertTrue(loginPage.getRegistrationLink());
+        Assert.assertTrue(loginPage.registrationLinkIsDisplayed());
     }
 
     @Test (dataProvider = "IncorrectLoginData", dataProviderClass = TestDataProvider.class)
@@ -48,6 +46,11 @@ public class LoginTests extends BaseTest {
         loginPage.provideEmail(email)
                 .providePassword(password)
                 .clickSubmit();
-        Assert.assertTrue(loginPage.getRegistrationLink());
+        Assert.assertTrue(loginPage.registrationLinkIsDisplayed());
+    }
+    @Test
+    public void Login () {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login();
     }
 }

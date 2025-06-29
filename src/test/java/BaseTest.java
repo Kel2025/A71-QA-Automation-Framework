@@ -1,15 +1,14 @@
-import com.github.javafaker.Faker;
+import PageFactory.BasePage;
+import PageFactory.HomePage;
+import PageFactory.LoginPage;
+import PageFactory.ProfilePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
-
 import java.time.Duration;
 
 
@@ -29,8 +28,6 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"BaseURL"})
-
-
     public void launchBrowser(String baseURL) {
         // Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
@@ -49,21 +46,8 @@ public class BaseTest {
     }
     public void navigateUrl() {driver.get(url); }
 
+
+
     @AfterMethod
     public void closeBrowser() {driver.quit(); }
-
-
-
-
-    public String generateRandomPlaylistName() {
-        Faker faker = new Faker();
-        String newName = faker.buffy().characters();
-        return newName;
-    }
-
-    public String randomPlaylistName() {
-        Faker faker = new Faker();
-        String newName = faker.cat().breed();
-        return newName;
-    }
 }
