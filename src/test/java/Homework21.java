@@ -15,15 +15,13 @@ public class Homework21 extends BaseTest {
         String newPlaylistName = basePage.generateRandomPlaylistName();
         String updatedPlaylistMsg = "Updated playlist \"" + newPlaylistName  + ".\"";
 
-//        LoginPage loginPage = new LoginPage(driver);
-//        HomePage homePage = new HomePage(driver);
 
         //Log in to koel app
         loginPage.login();
         // double click playlist from side menu
         homePage.doubleClickPlaylist();
         //clear field, enter new playlist name
-        homePage.enterNewPlaylistName(newPlaylistName);
+        homePage.editPlaylistName(newPlaylistName);
         // Assert that the actual playlist name matches the new randomly generated name
         Assert.assertEquals(homePage.getSuccessMsgText(), updatedPlaylistMsg);
     }
@@ -36,9 +34,6 @@ public class Homework21 extends BaseTest {
         BasePage basePage = new BasePage(driver);
         String playlistName = basePage.randomPlaylistName();
         String createdPlaylistMsg = "Created playlist \"" + playlistName  + ".\"";
-
-//        LoginPage loginPage = new LoginPage(driver);
-//        HomePage homePage = new HomePage(driver);
 
         loginPage.login();
         homePage.clickCreatePlaylistBtn();

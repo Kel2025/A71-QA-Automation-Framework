@@ -11,25 +11,23 @@ import org.testng.annotations.Test;
 public class ProfileTests extends BaseTest {
 
     @Test
-    public void changeProfileName() {
+    public void changeProfileName()  {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         ProfilePage profilePage = new ProfilePage(driver);
         BasePage basePage = new BasePage(driver);
 
-        String randomName = basePage.generateRandomName();
-
-
         loginPage.login();
         homePage.clickUserAvatarIcon();
+        String randomName = basePage.generateRandomName();
         profilePage.provideCurrentPassword("P!990109189300ok").provideNewProfileName(randomName).clickSaveBtn();
         //assert profile name changed
-      //  Assert.assertEquals(homePage.getProfileNameText(), randomName);
+        wait.until(ExpectedConditions.textToBe(By.cssSelector("span[class='name']"), randomName));
         String profileName = homePage.getProfileNameText();
-        Assert.assertEquals(profileName, randomName);
-
+        Assert.assertEquals(profileName, randomName,
+                "Expected profile name: '" + randomName + "' Found profile name: '" + profileName +"'");
     }
- }
+}
 
 
 

@@ -46,7 +46,7 @@ import java.util.List;
         public void renamePlaylist() throws InterruptedException {
             LoginPage loginPage = new LoginPage(driver);
             BasePage basePage = new BasePage(driver);
-            // double click to choose playlist
+
             String playlistName = basePage.generateRandomPlaylistName();
 
             loginPage.login();
