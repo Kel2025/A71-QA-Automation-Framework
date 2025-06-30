@@ -27,10 +27,10 @@ public class BaseTest {
     static WebDriverWait wait;
 
     @BeforeSuite
-    static void setupClass() {
-        // WebDriverManager.chromedriver().setup();
-        WebDriverManager.firefoxdriver().setup();
-    }
+//    static void setupClass() {
+//          WebDriverManager.chromedriver().setup();
+//      //  WebDriverManager.firefoxdriver().setup();
+//    }
 
     @BeforeMethod
     @Parameters({"BaseURL"})
@@ -57,6 +57,7 @@ public class BaseTest {
         }
     }
 
+    // Selenium Grid Setup
     public static WebDriver pickBrowser (String browser) throws MalformedURLException {
         DesiredCapabilities cap = new DesiredCapabilities();
         String gridURL = "http://192.168.1.67:4444/";
