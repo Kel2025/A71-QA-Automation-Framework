@@ -1,4 +1,7 @@
-import POM.LoginPage;
+import PageFactory.LoginPage;
+import PageFactory.HomePage;
+import PageFactory.ProfilePage;
+import PageFactory.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
