@@ -12,10 +12,10 @@ public class ProfileTests extends BaseTest {
 
     @Test
     public void changeProfileName()  {
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        ProfilePage profilePage = new ProfilePage(driver);
-        BasePage basePage = new BasePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        ProfilePage profilePage = new ProfilePage(getDriver());
+        BasePage basePage = new BasePage(getDriver());
 
         loginPage.login();
         homePage.clickUserAvatarIcon();
