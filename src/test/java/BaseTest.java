@@ -42,6 +42,7 @@ public class BaseTest {
         navigateUrl();
     }
 
+
     public static void navigateUrl() {getDriver().get(url); }
 
     @AfterMethod
@@ -51,29 +52,27 @@ public class BaseTest {
         threadDriver.remove();
     }
 
+
     // Selenium Grid Setup
     public  WebDriver pickBrowser (String browser) throws MalformedURLException {
         DesiredCapabilities cap = new DesiredCapabilities();
         String gridURL = "http://192.168.1.67:4444/";
         switch (browser) {
-            case "firefox": // gradle clean test -Dbrowser=firefox
+            case "firefox":
                 WebDriverManager.firefoxdriver().setup();
                 return driver = new FirefoxDriver();
-            case "MicrosoftEdge": // gradle clean test -Dbrowser=MicrosoftEdge
+            case "MicrosoftEdge":
                 WebDriverManager.edgedriver().setup();
                 EdgeOptions edgeOptions = new EdgeOptions();
                 edgeOptions.addArguments("--remote-allow-origins=*");
                 return driver = new EdgeDriver(edgeOptions);
-            case "grid-firefox": // gradle clean test -Dbrowser=grid-firefox
+            case "grid-firefox":
                 cap.setCapability("browserName", "firefox");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), cap);
-            case "grid-edge": // gradle clean test -Dbrowser=grid-edge
+            case "grid-edge":
                 cap.setCapability("browserName", "MicrosoftEdge");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), cap);
-            case "grid-chrome": // gradle clean test -Dbrowser=grid-chrome
-                cap.setCapability("browserName", "chrome");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), cap);
-            case "cloud": // gradle clean test -Dbrowser=cloud
+            case "cloud":
                 return lambdaTest();
             default:
                 WebDriverManager.chromedriver().setup();
